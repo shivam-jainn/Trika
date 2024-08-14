@@ -9,7 +9,8 @@ import pixelRouter from "./routes/pixel.routes";
 import statsRouter from "./routes/stats.routes";
 import campaignRouter from "./routes/campaign.routes";
 import templateRouter from "./routes/templates.routes";
-import scheduleRouter from "./routes/schedule.routes";
+import settingsRouter from "./routes/settings.routes"
+
 const app = express();
 
 app.use(express.json());
@@ -41,6 +42,7 @@ app.use("/stats", statsRouter);
 app.use("/campaigns", campaignRouter);
 app.use("/templates", templateRouter);
 // app.use("/schedule", scheduleRouter);
+app.use("/settings", settingsRouter);
 
 app.get("/health", (req, res) => {
   res.json("healthy");
