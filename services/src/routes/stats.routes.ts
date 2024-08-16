@@ -234,6 +234,30 @@ statsRouter.get("/:campaignID/bounces/:campaignType", async (req: Request, res: 
 });
 
 
+  statsRouter.get("/", async (req: Request, res: Response) => {
+    try {
+        const { cursor, take } = req.query;
+
+        const takeNumber = take ? parseInt(take as string, 10) : 10;
+
+        const campaigns = await prisma.campaign.findMany({
+            take: takeNumber,
+            skip: cursor ? 1 : 0,
+            ...(cursor && {
+                cursor: { id: cursor as string },
+            }),
+            orderBy: {
+                id: 'asc', // Ensure consistent ordering
+            }
+        });
+
+        return res.json(campaigns);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "An error occurred while fetching campaigns" });
+    }
+});
+
 
 
 
