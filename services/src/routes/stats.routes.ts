@@ -259,6 +259,32 @@ statsRouter.get("/:campaignID/bounces/:campaignType", async (req: Request, res: 
 });
 
 
+statsRouter.get(
+    "/:campaignID/email",
+    async (req: Request, res: Response) => {
+      const { campaignID } = req.params;
+  
+      try {
+        // Use type assertion to inform TypeScript about the expected method
+        const emailCampaigns = await prisma.emailCampaign.findMany({
+          where: {
+            campaignID: campaignID,
+          },
+        });
+  
+        if (!emailCampaigns || emailCampaigns.length === 0) {
+          return res.status(404).json({ error: "Campaign not found" });
+        }
+  
+        res.json(emailCampaigns);
+      } catch (error) {
+        console.error(error);
+        res
+          .status(500)
+          .json({ error: "An error occurred while fetching bounces" });
+      }
+    },
+  );
 
 
 export default statsRouter;

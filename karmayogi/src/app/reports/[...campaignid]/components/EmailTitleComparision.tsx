@@ -34,7 +34,6 @@ const metrics: Array<keyof Omit< I_GlobalChart_EmailTitleComparision, 'campaignN
   "opened",
   "mobile",
   "desktop",
-  "linkConversion"
 ]
 
 // Transform data to fit the chart
