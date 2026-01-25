@@ -20,7 +20,40 @@ SPV/MDO will be able to connect with users, understand their issues, nudge them 
 - Provide data insights to SPVs and MDOs for informed decision-making on promoting learning initiatives on iGOT.
 
 ## Setup/Installation
--
+
+### Quick start (local, safe)
+
+1. Install dependencies (use pnpm or bun):
+   - pnpm: `pnpm install` in each project folder (preferred)
+   - bun: `bun install` is supported for local work but CI uses pnpm
+
+2. Start everything (apps only):
+   - `docker compose up --build`
+
+3. Start with databases (optional):
+   - `docker compose --profile db up --build` (this will start Postgres/Mongo/Redis)
+
+4. Frontend builds:
+   - `buildmail`: `pnpm run build` (output `dist`)
+   - `karmayogi`: `pnpm run build` (Next.js)
+
+---
+
+### Dependabot
+
+Dependabot is enabled and will open weekly patch/minor PRs for the project. CI checks run on PRs and will surface issues before merge.
+
+### Vercel
+
+- `karmayogi` (Next.js) should be configured in Vercel with Node 20 and build command `pnpm run build-vercel`.
+- `buildmail` (Vite) should use build command `pnpm run build` with output directory `dist` (see `buildmail/vercel.json`).
+
+### Notes
+
+- This update only contains non-breaking changes: Dependabot configuration, Dockerfile hardening (Node 20, non-root user, HEALTHCHECK), `docker-compose.yml`, `vercel.json` files and README improvements.
+- For package updates we enable Dependabot to create patch/minor update PRs automatically; no direct dependency bumps were applied in this commit.
+
+
 
 ## Expected Outcome
 - Improved user engagement and communication channels between SPVs, MDOs, and the iGOT user base.

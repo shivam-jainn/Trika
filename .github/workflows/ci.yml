@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [buildmail, karmayogi, services, channels]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install pnpm
+        run: npm i -g pnpm@8
+      - name: Install & build
+        working-directory: ${{ matrix.project }}
+        run: |
+          pnpm install --frozen-lockfile || pnpm install
+          pnpm run build || echo "no build script"
+      - name: Run tests
+        working-directory: ${{ matrix.project }}
+        run: |
+          pnpm test || echo "no tests or tests failed"

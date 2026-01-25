@@ -1,0 +1,51 @@
+version: 2
+updates:
+  - package-ecosystem: "pnpm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    allow:
+      - dependency-type: "all"
+    labels:
+      - "deps"
+
+  - package-ecosystem: "pnpm"
+    directory: "/buildmail"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
+    labels:
+      - "deps"
+
+  - package-ecosystem: "pnpm"
+    directory: "/karmayogi"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
+    labels:
+      - "deps"
+
+  - package-ecosystem: "pnpm"
+    directory: "/channels"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
+    labels:
+      - "deps"
+
+  - package-ecosystem: "pnpm"
+    directory: "/services"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
+    labels:
+      - "deps"

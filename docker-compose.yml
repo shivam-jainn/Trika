@@ -1,0 +1,71 @@
+version: "3.9"
+
+services:
+  services:
+    build:
+      context: ./services
+      dockerfile: Dockerfile
+    container_name: services
+    ports:
+      - "3010:3010"
+    env_file:
+      - ./services/.env.example
+    depends_on:
+      - channels
+
+  channels:
+    build:
+      context: ./channels
+      dockerfile: Dockerfile
+    container_name: channels
+    ports:
+      - "3011:3011"
+    env_file:
+      - ./channels/.env.example
+
+  buildmail:
+    build:
+      context: ./buildmail
+      dockerfile: Dockerfile
+    container_name: buildmail
+    ports:
+      - "3001:3001"
+
+  karmayogi:
+    build:
+      context: ./karmayogi
+      dockerfile: Dockerfile
+    container_name: karmayogi
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./karmayogi/.env.example
+
+  # Optional DB services (opt-in via `--profile db`) --------------------------------
+  postgres:
+    image: postgres:15
+    profiles: [db]
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:7
+    profiles: [db]
+    volumes:
+      - mongodata:/data/db
+
+  redis:
+    image: redis:7
+    profiles: [db]
+
+volumes:
+  pgdata:
+  mongodata:
+
+# Usage:
+#  - Start core apps only: `docker compose up --build`
+#  - Start apps + DBs: `docker compose --profile db up --build`
