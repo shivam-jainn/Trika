@@ -1,5 +1,7 @@
 # Trika
 
+![Trika Banner](./assets/readme.png)
+
 > An AI-powered communication and engagement platform designed to help organizations connect with millions of users through targeted campaigns, intelligent analytics, and automated communication workflows.
 
 ## Overview
