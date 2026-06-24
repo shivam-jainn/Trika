@@ -1,61 +1,227 @@
-# Meity-iGOT-KarmaYogi
-#Communications Console
+# Trika
 
-## About
-SPV and MDO be able to reach out to their 30M userbase for targeted marketing and feedback mechanism.
+> An AI-powered communication and engagement platform designed to help organizations connect with millions of users through targeted campaigns, intelligent analytics, and automated communication workflows.
 
-## Feature Value
-SPV/MDO will be able to connect with users, understand their issues, nudge them to enroll, complete course consumption. With the data insights, SPV/MDO be able to take decisions how to promote learning on iGOT.
+## Overview
 
-## Feature Vision
+Trika is a unified communications platform that combines campaign management, bulk messaging, email intelligence, analytics, and AI-powered data access into a single system.
 
-- SPV/MDO be able to create user buckets based on certain criteria. E.g. users who have enrolled in at least 1 course etc.
-- SPV/MDO be able to query and create user buckets by querying in natural language (NLP and LLM). e.g., A SPV may say, “Create a list of users who have been active for at least 5 hours in past 24 hours”.
-- Upload SMS, WhatsApp Messages formats and email pre-defined templates.
-- SPV/MDO be able to enable feedback mechanism and enabling analytics and AI driven insights from the responses.
+Built with an event-driven architecture, Trika enables organizations to reach large user bases efficiently while providing actionable insights into user engagement and campaign performance.
 
-## Goals & Mid-Point Milestone
-- Develop a Communications Console integrated with iGOT Platform, enabling SPVs and MDOs to engage with a user base of 30 million through SMS, WhatsApp, and Email channels.
-- Facilitate targeted marketing campaigns and feedback mechanisms to enhance user enrollment and course completion rates.
-- Provide data insights to SPVs and MDOs for informed decision-making on promoting learning initiatives on iGOT.
+The platform was developed as part of **MeitY × DMP India**, supporting large-scale outreach and feedback collection initiatives.
 
-## Setup/Installation
--
+---
 
-## Expected Outcome
-- Improved user engagement and communication channels between SPVs, MDOs, and the iGOT user base.
-- Increased user enrollment and course consumption through targeted marketing campaigns and personalized communication.
-- Enhanced data analytics capabilities to derive actionable insights from user feedback and interactions.
+## Core Features
 
-## Acceptance Criteria
-- Communications Console successfully integrated with iGOT Platform, allowing SPVs and MDOs to access SMS, WhatsApp, and Email channels.
-- Ability to create user buckets based on specific criteria such as course enrollment status, activity level, etc.
-- Natural language query capability implemented using NLP and LLM for creating user buckets.
-- Upload functionality for SMS, WhatsApp messages formats, and email pre-defined templates.
-- Feedback mechanism enabled with analytics and AI-driven insights derived from user responses.
-- User feedback indicating satisfaction with communication effectiveness and responsiveness.
+### 🤖 AI-Powered Natural Language Analytics
 
-## Implementation Details
-  
+Query organizational data using natural language.
 
+Trika leverages Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) to translate plain-English questions into executable SQL queries across multiple databases.
 
-## Mockups/Wireframes
-- 
+#### Example
 
-## Product Name
-Karmayogi
+```sql
+Show users who enrolled in a course but did not complete it within 30 days.
+```
 
-## Organisation Name
-MeitY
+Features:
 
-## Domain
-⁠Learning & Development
+* Natural Language → SQL generation
+* Multi-database support
+* Schema-aware query generation using RAG
+* Secure query validation and execution
+* Interactive analytics and reporting
 
-## Tech Skills Needed
-Other
+---
 
-## Mentor(s)
-@mbcse
+### 📢 Campaign Management
 
-## Category
-Fullstack
+Create, manage, and monitor communication campaigns at scale.
+
+Features:
+
+* Audience segmentation
+* Campaign scheduling
+* Bulk messaging
+* Delivery tracking
+* Engagement analytics
+* User feedback collection
+
+---
+
+### ⚡ Event-Driven Processing
+
+Trika uses Redis-backed queues to process high-volume workloads asynchronously.
+
+Supported workloads include:
+
+* Campaign dispatching
+* Tracking event ingestion
+* Analytics aggregation
+* Email synchronization
+* Webhook processing
+
+This architecture ensures responsiveness while handling millions of events reliably.
+
+---
+
+### 📈 Engagement Tracking & Analytics
+
+Gain visibility into campaign performance through real-time event tracking.
+
+Features:
+
+* Open tracking
+* Click tracking
+* User activity monitoring
+* Campaign performance analytics
+* Real-time dashboards
+
+Events are collected through webhooks and processed asynchronously for scalability.
+
+---
+
+### 📬 Email Intelligence
+
+Transform traditional email workflows into a modern conversational experience.
+
+Features:
+
+* IMAP-based email synchronization
+* Automatic email ingestion
+* Conversation threading
+* Chat-style email interface
+* Background processing pipelines
+
+Emails are continuously fetched, parsed, and indexed for efficient retrieval and interaction.
+
+---
+
+### 🎨 Visual Email Builder
+
+Design professional email templates without writing code.
+
+Features:
+
+* Drag-and-drop editor
+* Responsive email templates
+* Reusable content blocks
+* Asset management
+* Template versioning
+
+Assets are stored in AWS S3, providing scalable and reliable storage.
+
+---
+
+## System Architecture
+
+```text
+┌───────────────────────────────────────────┐
+│                 Trika                      │
+└─────────────────────┬─────────────────────┘
+                      │
+                      ▼
+
+         ┌─────────────────────────┐
+         │      API Gateway        │
+         └───────────┬─────────────┘
+                     │
+
+     ┌───────────────┼────────────────┐
+     ▼               ▼                ▼
+
+┌─────────┐   ┌─────────────┐   ┌──────────┐
+│ AI/RAG  │   │ Campaigns   │   │ Email    │
+│ Engine  │   │ Service     │   │ Service  │
+└────┬────┘   └──────┬──────┘   └────┬─────┘
+     │               │               │
+     └───────────────┼───────────────┘
+                     ▼
+
+         ┌─────────────────────────┐
+         │      Redis Queue         │
+         └───────────┬─────────────┘
+                     ▼
+
+         ┌─────────────────────────┐
+         │    Worker Processes      │
+         └───────────┬─────────────┘
+
+         ┌───────────┼─────────────┐
+         ▼                         ▼
+
+ ┌─────────────────┐     ┌─────────────────┐
+ │ Tracking Engine │     │ Analytics Engine│
+ └─────────────────┘     └─────────────────┘
+```
+
+---
+
+## Technology Stack
+
+### Frontend
+
+* Next.js
+* React
+* TypeScript
+
+### Backend
+
+* Node.js
+* Express.js
+
+### AI & Data
+
+* Large Language Models (LLMs)
+* Retrieval-Augmented Generation (RAG)
+
+### Infrastructure
+
+* Redis
+* AWS S3
+* Webhooks
+
+### Integrations
+
+* IMAP
+* SMTP
+* SQL Databases
+
+---
+
+## Key Highlights
+
+* AI-powered Natural Language → SQL querying
+* Multi-database analytics support
+* Redis-based asynchronous processing
+* Large-scale campaign management
+* Email-to-chat transformation pipeline
+* Webhook-driven engagement tracking
+* Real-time analytics and reporting
+* Extensible service-oriented architecture
+
+---
+
+## Impact
+
+Trika was built to simplify large-scale communication and user engagement for organizations managing millions of users.
+
+By combining AI-driven analytics, event-driven infrastructure, and communication tooling, Trika enables teams to:
+
+* Reach users effectively
+* Measure engagement in real time
+* Collect actionable feedback
+* Automate communication workflows
+* Make data-driven decisions at scale
+
+---
+
+## License
+
+MIT License
+
+```
+Copyright (c) Shivam Jain
+```
